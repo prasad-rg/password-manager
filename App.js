@@ -2,12 +2,13 @@ import React from 'react';
 import {StyleSheet, View, SafeAreaView, Text} from 'react-native';
 import AuthScreenHolder from './src/components/AuthScreenHolder';
 import SignInScreen from './src/screens/SignInScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 
 const App = () => {
   return (
     <View style={styles.container}>
       {/* <AuthScreenHolder /> */}
-      <SignInScreen />
+    <SignUpScreen />
     </View>
   );
 };
