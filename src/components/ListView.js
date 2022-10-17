@@ -32,14 +32,15 @@ const ListView = ({
 const styles = StyleSheet.create({
   listContainer: {
     height: 104,
-    width: 320,
+    width: '100%',
     borderRadius: 12,
     backgroundColor: '#FFFFFF',
     elevation: 10,
-    shadowColor: 'rgba(0,0,0,0.02)',
+    shadowColor: '#171717',
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 0.2,
     shadowRadius: 2,
+    marginBottom: 10,
   },
   rowView: {
     flexDirection: 'row',
