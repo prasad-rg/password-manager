@@ -34,6 +34,7 @@ const AuthTabNavigator = () => {
                 tabBarLabelStyle: {
                   color: '#FFFFFF',
                   fontSize: 20,
+                  fontFamily: 'OpenSans-Bold',
                 },
                 tabBarStyle: {backgroundColor: 'transparent'},
                 tabBarIndicatorStyle: {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     margin: 14,
     color: '#FBFBFB',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
   },
   tabNavigator: {
     flex: 1,

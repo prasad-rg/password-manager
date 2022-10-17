@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'transparent',
-    // padding: 30,
   },
   singInComponentHolder: {
     marginTop: 43,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Semibold',
     fontSize: 14,
   },
   button: {
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     marginTop: 59,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
     color: '#FFFFFF',
     marginTop: 14,
     fontSize: 18,
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 13,
     textAlign: 'left',
+    fontFamily: 'OpenSans-Semibold',
   },
 });
 

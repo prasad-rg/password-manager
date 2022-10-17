@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 
 const Input = ({placeholder = 'Enter Here', style, value, onChangeText}) => {
   return (
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     height: 54,
     borderRadius: 4,
     backgroundColor: '#FFFFFF',
-    // borderWidth: 1,
     fontSize: 16,
     paddingLeft: 22,
     paddingVertical: 15,
+    fontFamily: 'OpenSans-Semibold',
   },
 });
 
