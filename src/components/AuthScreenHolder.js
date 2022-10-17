@@ -7,6 +7,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
+
 import logo from '../../assets/images/logo.png';
 import SignInScreen from '../screens/SignInScreen';
 
@@ -17,7 +18,6 @@ const AuthScreenHolder = () => {
         <Image source={logo} style={styles.logo} />
         <Text style={styles.headerText}>PASS {'\n'} MANAGER</Text>
       </View>
-      <SignInScreen />
     </SafeAreaView>
   );
 };

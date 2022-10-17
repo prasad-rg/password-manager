@@ -7,21 +7,23 @@ import fingerprintIcon from '../../assets/images/fingerprintIcon.png';
 const SignInScreen = () => {
   return (
     <View style={styles.container}>
-      <Input placeholder="Mobile Number" />
-      <Input placeholder="MPin" style={styles.mPinInput} />
-      <Pressable>
-        <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-      </Pressable>
-      <Button title="SIGN IN" style={styles.button} />
-      <View style={styles.fingerprintIconContiner}>
-        <Image source={fingerprintIcon} />
+      <View style={styles.singInComponentHolder}>
+        <Input placeholder="Mobile Number" />
+        <Input placeholder="MPin" style={styles.mPinInput} />
+        <Pressable>
+          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+        </Pressable>
+        <Button title="SIGN IN" style={styles.button} />
+        <View style={styles.fingerprintIconContiner}>
+          <Image source={fingerprintIcon} />
+        </View>
+        <Pressable>
+          <Text style={styles.boldText}>
+            OR {'\t'}
+            <Text style={styles.plainText}>USE YOUR FINGERPRINT TO LOGIN</Text>
+          </Text>
+        </Pressable>
       </View>
-      <Pressable>
-        <Text style={styles.boldText}>
-          OR {'\t'}
-          <Text style={styles.plainText}>USE YOUR FINGERPRINT TO LOGIN</Text>
-        </Text>
-      </Pressable>
     </View>
   );
 };
@@ -29,9 +31,12 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0E85FF',
+    backgroundColor: 'transparent',
+    // padding: 30,
+  },
+  singInComponentHolder: {
     marginTop: 43,
-    padding: 30,
+    flex: 1,
   },
   mPinInput: {
     marginVertical: 26,

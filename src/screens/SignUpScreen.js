@@ -1,16 +1,17 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import fingerprintIcon from '../../assets/images/fingerprintIcon.png';
 
 const SignUpScreen = () => {
   return (
     <View style={styles.container}>
-      <Input placeholder="Enter Mobile Number" />
-      <Input placeholder="Enter 4 digit MPin" style={styles.mPinInput} />
-      <Input placeholder="Re-Enter 4 digit MPin" style={styles.mPinInput} />
-      <Button title="SIGN IN" style={styles.button} />
+      <View style={styles.singUpComponentHolder}>
+        <Input placeholder="Enter Mobile Number" />
+        <Input placeholder="Enter 4 digit MPin" style={styles.mPinInput} />
+        <Input placeholder="Re-Enter 4 digit MPin" style={styles.mPinInput} />
+        <Button title="SIGN IN" style={styles.button} />
+      </View>
     </View>
   );
 };
@@ -18,9 +19,11 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0E85FF',
+    backgroundColor: 'transparent',
+  },
+  singUpComponentHolder: {
     marginTop: 43,
-    padding: 30,
+    flex: 1,
   },
   mPinInput: {
     marginVertical: 26,
