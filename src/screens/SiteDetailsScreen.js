@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const SiteDetailsScreen = ({navigation, route}) => {
   const [siteDetails, setSiteDetails] = useState(route.params.item);
@@ -11,7 +12,7 @@ const SiteDetailsScreen = ({navigation, route}) => {
         <Pressable
           style={styles.backButton}
           onPress={() => navigation.goBack()}>
-          <Text>{'<'}-</Text>
+          <Icon name="arrow-back-outline" size={24} color="#FFFFFF" />
         </Pressable>
         <Text style={styles.headerText}>Site Details</Text>
         <Pressable

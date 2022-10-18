@@ -7,6 +7,7 @@ const FormField = ({
   value,
   editable = true,
   secureTextEntry = false,
+  name,
 }) => {
   return (
     <View style={styles.formContainer}>
@@ -18,6 +19,7 @@ const FormField = ({
         value={value}
         editable={editable}
         secureTextEntry={secureTextEntry}
+        name={name}
       />
     </View>
   );

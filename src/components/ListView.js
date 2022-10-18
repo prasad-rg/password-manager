@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import imgUrl from '../../assets/images/Bitmap.png';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ListView = ({
   title = 'Facebook',
@@ -18,7 +19,8 @@ const ListView = ({
         </View>
         <View>
           <Text style={styles.siteText}>{title}</Text>
-          <Pressable onPress={copyPasswordText}>
+          <Pressable onPress={copyPasswordText} style={styles.passwordText}>
+            <MaterialIcons size={17} name={'flip-to-back'} color="#0E85FF" />
             <Text style={styles.copyPasswordText}>Copy Password</Text>
           </Pressable>
         </View>
@@ -69,12 +71,16 @@ const styles = StyleSheet.create({
     color: '#0E85FF',
   },
   copyPasswordText: {
-    // fontFamily: 'OpenSans-Regular',
+    fontFamily: 'OpenSans-Regular',
     color: '#0E85FF',
     fontSize: 13,
   },
+  passwordText: {
+    flexDirection: 'row',
+    marginTop: 0.6,
+  },
   urlText: {
-    // fontFamily: 'OpenSans-Regular',
+    fontFamily: 'OpenSans-Regular',
     color: '#3C4857',
   },
 });

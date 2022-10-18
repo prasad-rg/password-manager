@@ -1,17 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, Text, Pressable} from 'react-native';
+import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const EditScreen = ({navigation, route}) => {
   const siteDetails = route.params.siteDetails;
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.navBar}>
         <Pressable
           style={styles.backButton}
           onPress={() => navigation.goBack()}>
-          <Text>{'<'}-</Text>
+          <Icon name="arrow-back-outline" size={24} color="#FFFFFF" />
         </Pressable>
         <Text style={styles.headerText}>Edit</Text>
       </View>
@@ -32,7 +33,7 @@ const EditScreen = ({navigation, route}) => {
           <Text style={styles.buttonText}>Update</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -62,13 +63,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 43,
-    marginBottom: 40,
+    marginBottom: 0,
   },
   button: {
     width: '100%',
     height: 55,
     backgroundColor: '#0E85FF',
-    marginLeft: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
   },

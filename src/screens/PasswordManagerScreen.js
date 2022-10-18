@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   category: {
     fontSize: 19.2,
     color: '#3C4857',
+    fontFamily: 'OpenSans-Regular',
     // marginVertical: 4,
   },
   badge: {
