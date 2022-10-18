@@ -13,6 +13,7 @@ import searchIcon from '../../assets/images/search.png';
 import dataSyncIcon from '../../assets/images/sync_icn.png';
 import profileIcon from '../../assets/images/profile.png';
 import ListView from '../components/ListView';
+import FloatingActionButton from '../components/FloatingActionButton';
 const PasswordManagerScreen = () => {
   return (
     <View style={styles.statusbarColor}>
@@ -28,7 +29,10 @@ const PasswordManagerScreen = () => {
         </View>
         <View style={styles.listItemContainer}>
           <View style={styles.textHeaderContainer}>
-            <Text style={styles.headerText}>Sites</Text>
+            <View>
+              <Text style={styles.headerText}>Sites</Text>
+              <View style={styles.bottomBorder} />
+            </View>
             <Text style={styles.category}>Social Media</Text>
           </View>
           <ListView />
@@ -37,6 +41,7 @@ const PasswordManagerScreen = () => {
           <ListView />
           <ListView />
         </View>
+        <FloatingActionButton onPress={() => alert('Im working')} />
       </SafeAreaView>
     </View>
   );
@@ -83,6 +88,12 @@ const styles = StyleSheet.create({
     height: 37,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  bottomBorder: {
+    borderBottomColor: '#FFA136',
+    borderBottomWidth: 3.2,
+    borderBottomEndRadius: 1.6,
+    width: 28.8,
   },
   headerText: {
     fontFamily: 'OpenSans-Semibold',
