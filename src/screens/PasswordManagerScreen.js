@@ -22,7 +22,7 @@ const PasswordManagerScreen = ({navigation}) => {
       title={item.title}
       uri={item.icon}
       url={item.siteName}
-      onPress={() => navigation.navigate('SiteDetailsScreen')}
+      onPress={() => navigation.navigate('SiteDetailsScreen', {item})}
       copyPasswordText={() => alert(item.id)}
     />
   );

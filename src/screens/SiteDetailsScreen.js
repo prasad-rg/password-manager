@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
+import {findDetailsById} from '../utils/findDetailsById';
 
-const SiteDetailsScreen = ({navigation}) => {
+const SiteDetailsScreen = ({navigation, route}) => {
+  const [siteDetails, setSiteDetails] = useState(route.params.item);
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -20,12 +22,29 @@ const SiteDetailsScreen = ({navigation}) => {
         </Pressable>
       </View>
       <View style={styles.formFieldContainer}>
-        <FormField />
-        <FormField label="Site Name" />
-        <FormField label="Sector/Folder" />
-        <FormField label="User Name" />
-        <FormField label="Site Password" />
-        <TextArea label="Notes" />
+        <FormField label="URL" value={siteDetails.url} editable={false} />
+        <FormField
+          label="Site Name"
+          value={siteDetails.siteName}
+          editable={false}
+        />
+        <FormField
+          label="Sector/Folder"
+          value={siteDetails.folder}
+          editable={false}
+        />
+        <FormField
+          label="User Name"
+          value={siteDetails.userName}
+          editable={false}
+        />
+        <FormField
+          label="Site Password"
+          value={siteDetails.sitePassword}
+          editable={false}
+          secureTextEntry={true}
+        />
+        <TextArea label="Notes" value={siteDetails.notes} editable={false} />
       </View>
     </View>
   );

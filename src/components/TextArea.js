@@ -1,7 +1,12 @@
 import React from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 
-const TextArea = ({label = 'URL', onChangeText}) => {
+const TextArea = ({
+  label = 'URL',
+  onChangeText,
+  value,
+  editable = true,
+}) => {
   return (
     <View style={styles.textAreaContainer}>
       <Text style={styles.label}>{label}</Text>
@@ -11,6 +16,8 @@ const TextArea = ({label = 'URL', onChangeText}) => {
         onChangeText={onChangeText}
         numberOfLines={10}
         multiline={true}
+        value={value}
+        editable={editable}
       />
     </View>
   );

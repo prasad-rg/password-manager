@@ -1,7 +1,13 @@
 import React from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 
-const FormField = ({label = 'URL', onChangeText}) => {
+const FormField = ({
+  label = 'URL',
+  onChangeText,
+  value,
+  editable = true,
+  secureTextEntry = false,
+}) => {
   return (
     <View style={styles.formContainer}>
       <Text style={styles.label}>{label}</Text>
@@ -9,6 +15,9 @@ const FormField = ({label = 'URL', onChangeText}) => {
         style={styles.formField}
         placeholderTextColor="#3C4858"
         onChangeText={onChangeText}
+        value={value}
+        editable={editable}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );
