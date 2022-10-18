@@ -1,11 +1,27 @@
 import React from 'react';
 import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
+import {Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as yup from 'yup';
+import {updatePasswordDetails} from '../redux/passManager';
+
+const EditSiteValidationSchema = yup.object().shape({
+  url: yup
+    .string()
+    .required('Please Enter a valid URL')
+    .required('URL is Required'),
+  sitePassword: yup
+    .string()
+    .min(8, ({min}) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+});
 
 const EditScreen = ({navigation, route}) => {
   const siteDetails = route.params.siteDetails;
+  const dispatch = useDispatch();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.navBar}>
@@ -16,23 +32,80 @@ const EditScreen = ({navigation, route}) => {
         </Pressable>
         <Text style={styles.headerText}>Edit</Text>
       </View>
-      <View style={styles.formFieldContainer}>
-        <FormField label="URL" value={siteDetails.url} />
-        <FormField label="Site Name" value={siteDetails.siteName} />
-        <FormField label="Sector/Folder" value={siteDetails.folder} />
-        <FormField label="User Name" value={siteDetails.userName} />
-        <FormField
-          label="Site Password"
-          value={siteDetails.sitePassword}
-          secureTextEntry={true}
-        />
-        <TextArea label="Notes" value={siteDetails.notes} />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Update</Text>
-        </Pressable>
-      </View>
+      <Formik
+        validationSchema={EditSiteValidationSchema}
+        initialValues={{
+          url: siteDetails.url,
+          sitePassword: siteDetails.sitePassword,
+          folder: siteDetails.folder,
+          userName: siteDetails.userName,
+          siteName: siteDetails.siteName,
+          notes: siteDetails.notes,
+        }}
+        onSubmit={(values, {resetForm}) => {
+          values = {
+            ...values,
+            id: siteDetails.id,
+            icon: '',
+            title: values.siteName.substring(4, values.siteName.length - 4),
+          };
+          // console.log(values);
+          dispatch(updatePasswordDetails(values));
+          // let item = values;
+          // navigation.replace('SiteDetailsScreen', {item});
+          navigation.navigate('PasswordManager');
+        }}
+        onReset={({resetForm}) => resetForm()}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          handleReset,
+        }) => (
+          <>
+            <View style={styles.formFieldContainer}>
+              <FormField
+                label="URL"
+                value={values.url}
+                onChangeText={handleChange('url')}
+              />
+              <FormField
+                label="Site Name"
+                value={values.siteName}
+                onChangeText={handleChange('siteName')}
+              />
+              <FormField
+                label="Sector/Folder"
+                value={values.folder}
+                onChangeText={handleChange('folder')}
+              />
+              <FormField
+                label="User Name"
+                value={values.userName}
+                onChangeText={handleChange('userName')}
+              />
+              <FormField
+                label="Site Password"
+                value={values.sitePassword}
+                secureTextEntry={true}
+                onChangeText={handleChange('sitePassword')}
+              />
+              <TextArea
+                label="Notes"
+                value={values.notes}
+                onChangeText={handleChange('notes')}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <Pressable style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>Update</Text>
+              </Pressable>
+            </View>
+          </>
+        )}
+      </Formik>
     </ScrollView>
   );
 };

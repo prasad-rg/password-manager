@@ -17,7 +17,7 @@ const SiteDetailsScreen = ({navigation, route}) => {
         <Text style={styles.headerText}>Site Details</Text>
         <Pressable
           style={styles.backButton}
-          onPress={() => navigation.navigate('EditScreen', {siteDetails})}>
+          onPress={() => navigation.push('EditScreen', {siteDetails})}>
           <Text style={[styles.headerText, {marginLeft: 130}]}>Edit</Text>
         </Pressable>
       </View>

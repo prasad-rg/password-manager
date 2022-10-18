@@ -73,12 +73,12 @@ export const passManagerSlice = createSlice({
         return todoItem;
       });
     },
-    editTodo: (state, action) => {
-      state.value = state.value.map(todoItem => {
-        if (todoItem.id === action.payload.id) {
-          todoItem.task = action.payload.task;
+    updatePasswordDetails: (state, action) => {
+      state.value = state.value.map(passwordObject => {
+        if (passwordObject.id === action.payload.id) {
+          passwordObject = action.payload;
         }
-        return todoItem;
+        return passwordObject;
       });
     },
     deleteTodo: (state, action) => {
@@ -89,6 +89,11 @@ export const passManagerSlice = createSlice({
   },
 });
 
-export const {addNewPassword, switchStatus, editTodo, deleteTodo} =
-  passManagerSlice.actions;
+export const {
+  addNewPassword,
+  updatePasswordDetails,
+  switchStatus,
+  editTodo,
+  deleteTodo,
+} = passManagerSlice.actions;
 export default passManagerSlice.reducer;
