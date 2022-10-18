@@ -56,12 +56,12 @@ const initialValue = [
 ];
 
 export const passManagerSlice = createSlice({
-  name: 'todo',
+  name: 'passManager',
   initialState: {
     value: initialValue,
   },
   reducers: {
-    createTodo: (state, action) => {
+    addNewPassword: (state, action) => {
       state.value.push(action.payload);
     },
     switchStatus: (state, action) => {
@@ -88,6 +88,6 @@ export const passManagerSlice = createSlice({
   },
 });
 
-export const {createTodo, switchStatus, editTodo, deleteTodo} =
+export const {addNewPassword, switchStatus, editTodo, deleteTodo} =
   passManagerSlice.actions;
 export default passManagerSlice.reducer;

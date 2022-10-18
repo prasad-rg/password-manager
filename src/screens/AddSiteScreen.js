@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
 import {Formik} from 'formik';
+import uuid from 'react-native-uuid';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -38,8 +39,24 @@ const AddSiteScreen = ({navigation}) => {
           siteName: '',
           notes: '',
         }}
-        onSubmit={values => console.log(values)}>
-        {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+        onSubmit={(values, {resetForm}) => {
+          values = {
+            ...values,
+            id: uuid.v4(),
+            icon: '',
+            title: values.siteName.substring(4, values.siteName.length - 4),
+          };
+          resetForm();
+        }}
+        onReset={({resetForm}) => resetForm()}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          handleReset,
+        }) => (
           <>
             <View style={styles.formFieldContainer}>
               <FormField
@@ -88,13 +105,11 @@ const AddSiteScreen = ({navigation}) => {
               />
             </View>
             <View style={styles.buttonContainer}>
-              <Pressable style={styles.button}>
+              <Pressable style={styles.button} onPress={handleReset}>
                 <Text style={styles.buttonText}>Reset</Text>
               </Pressable>
-              <Pressable style={styles.button}>
-                <Text style={styles.buttonText} onPress={handleSubmit}>
-                  Submit
-                </Text>
+              <Pressable style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>Submit</Text>
               </Pressable>
             </View>
           </>
