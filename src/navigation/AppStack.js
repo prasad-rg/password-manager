@@ -1,18 +1,30 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PasswordManagerScreen from '../screens/PasswordManagerScreen';
 import AddSiteScreen from '../screens/AddSiteScreen';
-import {Text} from 'react-native';
-import Icon from '../../assets/images/add_btn.png';
 import SiteDetailsScreen from '../screens/SiteDetailsScreen';
 import EditScreen from '../screens/EditScreen';
+import AuthTabNavigator from './AuthTabNavigator';
 const Stack = createNativeStackNavigator();
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'transparent',
+  },
+};
 
 const AppStack = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <Stack.Navigator>
+        <Stack.Screen
+          name="Auth"
+          component={AuthTabNavigator}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="PasswordManager"
           component={PasswordManagerScreen}

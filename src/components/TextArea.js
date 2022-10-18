@@ -1,12 +1,7 @@
 import React from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 
-const TextArea = ({
-  label = 'URL',
-  onChangeText,
-  value,
-  editable = true,
-}) => {
+const TextArea = ({label = 'URL', onChangeText, value, editable = true}) => {
   return (
     <View style={styles.textAreaContainer}>
       <Text style={styles.label}>{label}</Text>

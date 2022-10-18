@@ -1,7 +1,6 @@
 import React from 'react';
 import {SafeAreaView, View, Text, Image, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import logo from '../../assets/images/logo.png';
 import SignInScreen from '../screens/SignInScreen';
@@ -9,15 +8,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
-const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: 'transparent',
-  },
-};
-
-const AuthTabNavigator = () => {
+const AuthTabNavigator = ({navigation}) => {
   return (
     <LinearGradient
       colors={['#20BBFF', '#0E85FF']}
@@ -28,26 +19,24 @@ const AuthTabNavigator = () => {
           <Text style={styles.headerText}>PASS {'\n'}MANAGER</Text>
         </View>
         <View style={styles.tabNavigator}>
-          <NavigationContainer theme={MyTheme}>
-            <Tab.Navigator
-              screenOptions={{
-                tabBarLabelStyle: {
-                  color: '#FFFFFF',
-                  fontSize: 20,
-                  fontFamily: 'OpenSans-Bold',
-                },
-                tabBarStyle: {backgroundColor: 'transparent'},
-                tabBarIndicatorStyle: {
-                  backgroundColor: '#FFA222',
-                  width: 81,
-                  height: 4,
-                  marginLeft: 50,
-                },
-              }}>
-              <Tab.Screen name="SIGN IN" component={SignInScreen} />
-              <Tab.Screen name="SIGN UP" component={SignUpScreen} />
-            </Tab.Navigator>
-          </NavigationContainer>
+          <Tab.Navigator
+            screenOptions={{
+              tabBarLabelStyle: {
+                color: '#FFFFFF',
+                fontSize: 20,
+                fontFamily: 'OpenSans-Bold',
+              },
+              tabBarStyle: {backgroundColor: 'transparent'},
+              tabBarIndicatorStyle: {
+                backgroundColor: '#FFA222',
+                width: 81,
+                height: 4,
+                marginLeft: 50,
+              },
+            }}>
+            <Tab.Screen name="SIGN IN" component={SignInScreen} />
+            <Tab.Screen name="SIGN UP" component={SignUpScreen} />
+          </Tab.Navigator>
         </View>
       </SafeAreaView>
     </LinearGradient>

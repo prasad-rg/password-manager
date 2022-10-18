@@ -3,7 +3,8 @@ import {View, StyleSheet, Text, Pressable} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 
-const EditScreen = ({navigation}) => {
+const EditScreen = ({navigation, route}) => {
+  const siteDetails = route.params.siteDetails;
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -15,12 +16,16 @@ const EditScreen = ({navigation}) => {
         <Text style={styles.headerText}>Edit</Text>
       </View>
       <View style={styles.formFieldContainer}>
-        <FormField />
-        <FormField label="Site Name" />
-        <FormField label="Sector/Folder" />
-        <FormField label="User Name" />
-        <FormField label="Site Password" />
-        <TextArea label="Notes" />
+        <FormField label="URL" value={siteDetails.url} />
+        <FormField label="Site Name" value={siteDetails.siteName} />
+        <FormField label="Sector/Folder" value={siteDetails.folder} />
+        <FormField label="User Name" value={siteDetails.userName} />
+        <FormField
+          label="Site Password"
+          value={siteDetails.sitePassword}
+          secureTextEntry={true}
+        />
+        <TextArea label="Notes" value={siteDetails.notes} />
       </View>
       <View style={styles.buttonContainer}>
         <Pressable style={styles.button}>

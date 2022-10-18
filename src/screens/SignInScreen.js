@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import fingerprintIcon from '../../assets/images/fingerprintIcon.png';
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.singInComponentHolder}>
@@ -13,7 +13,11 @@ const SignInScreen = () => {
         <Pressable>
           <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
         </Pressable>
-        <Button title="SIGN IN" style={styles.button} />
+        <Button
+          title="SIGN IN"
+          style={styles.button}
+          onPress={() => navigation.navigate('PasswordManager')}
+        />
         <View style={styles.fingerprintIconContiner}>
           <Image source={fingerprintIcon} />
         </View>

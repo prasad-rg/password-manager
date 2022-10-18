@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
-import {findDetailsById} from '../utils/findDetailsById';
 
 const SiteDetailsScreen = ({navigation, route}) => {
   const [siteDetails, setSiteDetails] = useState(route.params.item);
@@ -17,7 +16,7 @@ const SiteDetailsScreen = ({navigation, route}) => {
         <Text style={styles.headerText}>Site Details</Text>
         <Pressable
           style={styles.backButton}
-          onPress={() => navigation.navigate('EditScreen')}>
+          onPress={() => navigation.navigate('EditScreen', {siteDetails})}>
           <Text style={[styles.headerText, {marginLeft: 130}]}>Edit</Text>
         </Pressable>
       </View>
