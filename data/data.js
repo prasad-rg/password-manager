@@ -34,7 +34,7 @@ export const data = [
     siteName: 'www.youtube.com',
     folder: 'Social Media',
     userName: 'smrockyt',
-    sitePassword: '12345678',
+    sitePassword: '1234567777',
     notes: '',
     icon: IMAGES_ICONS[3],
     title: 'Youtube',

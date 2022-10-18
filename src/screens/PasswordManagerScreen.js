@@ -15,15 +15,19 @@ import profileIcon from '../../assets/images/profile.png';
 import ListView from '../components/ListView';
 import FloatingActionButton from '../components/FloatingActionButton';
 import {data} from '../../data/data';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const PasswordManagerScreen = ({navigation}) => {
+  const copyToClipboard = sitePassword => {
+    Clipboard.setString(sitePassword);
+  };
   const renderItem = ({item}) => (
     <ListView
       title={item.title}
       uri={item.icon}
       url={item.siteName}
       onPress={() => navigation.navigate('SiteDetailsScreen', {item})}
-      copyPasswordText={() => alert(item.id)}
+      copyPasswordText={() => copyToClipboard(item.sitePassword)}
     />
   );
 
