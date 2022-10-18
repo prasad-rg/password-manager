@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
 import {Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 import uuid from 'react-native-uuid';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as yup from 'yup';
+import {addNewPassword} from '../redux/passManager';
 
 const AddSiteValidationSchema = yup.object().shape({
   url: yup
@@ -19,6 +21,8 @@ const AddSiteValidationSchema = yup.object().shape({
 });
 
 const AddSiteScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.navBar}>
@@ -46,7 +50,8 @@ const AddSiteScreen = ({navigation}) => {
             icon: '',
             title: values.siteName.substring(4, values.siteName.length - 4),
           };
-          resetForm();
+          dispatch(addNewPassword(values));
+          navigation.navigate('PasswordManager');
         }}
         onReset={({resetForm}) => resetForm()}>
         {({
@@ -65,9 +70,7 @@ const AddSiteScreen = ({navigation}) => {
                 onChangeText={handleChange('url')}
                 value={values.url}
               />
-              {errors.url && (
-                <Text style={{fontSize: 10, color: 'red'}}>{errors.url}</Text>
-              )}
+              {errors.url && <Text style={styles.errorText}>{errors.url}</Text>}
               <FormField
                 label="Site Name"
                 name="siteName"
@@ -91,11 +94,10 @@ const AddSiteScreen = ({navigation}) => {
                 name="sitePassword"
                 onChangeText={handleChange('sitePassword')}
                 value={values.sitePassword}
+                secureTextEntry={true}
               />
               {errors.sitePassword && (
-                <Text style={{fontSize: 10, color: 'red'}}>
-                  {errors.sitePassword}
-                </Text>
+                <Text style={styles.errorText}>{errors.sitePassword}</Text>
               )}
               <TextArea
                 label="Notes"
@@ -108,7 +110,7 @@ const AddSiteScreen = ({navigation}) => {
               <Pressable style={styles.button} onPress={handleReset}>
                 <Text style={styles.buttonText}>Reset</Text>
               </Pressable>
-              <Pressable style={styles.button} onPress={handleSubmit}>
+              <Pressable style={styles.button} onPress={() => handleSubmit()}>
                 <Text style={styles.buttonText}>Submit</Text>
               </Pressable>
             </View>
@@ -162,6 +164,10 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginLeft: 16,
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
   },
 });
 

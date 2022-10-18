@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
   FlatList,
+  Alert,
 } from 'react-native';
 import burgerMenuIcon from '../../assets/images/burger_menu.png';
 import passManagerIcon from '../../assets/images/PASS_MANAGER.png';
@@ -16,11 +17,16 @@ import ListView from '../components/ListView';
 import FloatingActionButton from '../components/FloatingActionButton';
 import {data} from '../../data/data';
 import Clipboard from '@react-native-clipboard/clipboard';
+import {useDispatch, useSelector} from 'react-redux';
 
 const PasswordManagerScreen = ({navigation}) => {
+  const {value} = useSelector(state => state.passManager);
+
   const copyToClipboard = sitePassword => {
     Clipboard.setString(sitePassword);
+    Alert.alert(sitePassword);
   };
+
   const renderItem = ({item}) => (
     <ListView
       title={item.title}
@@ -52,7 +58,7 @@ const PasswordManagerScreen = ({navigation}) => {
             <Text style={styles.category}>Social Media</Text>
           </View>
           <FlatList
-            data={data}
+            data={value}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />

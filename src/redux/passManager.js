@@ -63,6 +63,7 @@ export const passManagerSlice = createSlice({
   reducers: {
     addNewPassword: (state, action) => {
       state.value.push(action.payload);
+      console.log(state.value);
     },
     switchStatus: (state, action) => {
       state.value = state.value.map(todoItem => {

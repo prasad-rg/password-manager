@@ -1,9 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import AppStack from './src/navigation/AppStack';
+import {Provider} from 'react-redux';
+import store from './src/redux/store';
 
 const App = () => {
-  return <AppStack />;
+  return (
+    <Provider store={store}>
+      <AppStack />
+    </Provider>
+  );
   // return <AuthTabNavigator />;
 };
 
