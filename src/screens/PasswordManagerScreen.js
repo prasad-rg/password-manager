@@ -4,8 +4,8 @@ import {
   StyleSheet,
   Text,
   Image,
-  Pressable,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import burgerMenuIcon from '../../assets/images/burger_menu.png';
 import passManagerIcon from '../../assets/images/PASS_MANAGER.png';
@@ -14,7 +14,19 @@ import dataSyncIcon from '../../assets/images/sync_icn.png';
 import profileIcon from '../../assets/images/profile.png';
 import ListView from '../components/ListView';
 import FloatingActionButton from '../components/FloatingActionButton';
+import {data} from '../../data/data';
+
 const PasswordManagerScreen = ({navigation}) => {
+  const renderItem = ({item}) => (
+    <ListView
+      title={item.title}
+      uri={item.icon}
+      url={item.siteName}
+      onPress={() => navigation.navigate('SiteDetailsScreen')}
+      copyPasswordText={() => alert(item.id)}
+    />
+  );
+
   return (
     <View style={styles.statusbarColor}>
       <SafeAreaView style={styles.container}>
@@ -35,14 +47,11 @@ const PasswordManagerScreen = ({navigation}) => {
             </View>
             <Text style={styles.category}>Social Media</Text>
           </View>
-          <ListView
-            onPress={() => navigation.navigate('SiteDetailsScreen')}
-            copyPasswordText={() => alert('hello 1')}
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
           />
-          <ListView />
-          <ListView />
-          <ListView />
-          <ListView />
         </View>
         <FloatingActionButton onPress={() => navigation.navigate('AddSite')} />
       </SafeAreaView>

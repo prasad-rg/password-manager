@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Pressable, Image, Text} from 'react-native';
+import {StyleSheet, Pressable, Text} from 'react-native';
 
 const FloatingActionButton = ({onPress}) => {
   return (
