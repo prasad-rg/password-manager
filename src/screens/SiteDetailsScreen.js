@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, Pressable} from 'react-native';
 import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 
-const AddSiteScreen = ({navigation}) => {
+const SiteDetailsScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -12,7 +12,12 @@ const AddSiteScreen = ({navigation}) => {
           onPress={() => navigation.goBack()}>
           <Text>{'<'}-</Text>
         </Pressable>
-        <Text style={styles.headerText}>Add Site</Text>
+        <Text style={styles.headerText}>Site Details</Text>
+        <Pressable
+          style={styles.backButton}
+          onPress={() => navigation.navigate('EditScreen')}>
+          <Text style={[styles.headerText, {marginLeft: 130}]}>Edit</Text>
+        </Pressable>
       </View>
       <View style={styles.formFieldContainer}>
         <FormField />
@@ -21,14 +26,6 @@ const AddSiteScreen = ({navigation}) => {
         <FormField label="User Name" />
         <FormField label="Site Password" />
         <TextArea label="Notes" />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Reset</Text>
-        </Pressable>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </Pressable>
       </View>
     </View>
   );
@@ -80,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddSiteScreen;
+export default SiteDetailsScreen;

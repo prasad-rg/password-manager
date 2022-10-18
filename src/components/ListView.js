@@ -8,9 +8,10 @@ const ListView = ({
   uri,
   copyPasswordText,
   handelListPress,
+  onPress,
 }) => {
   return (
-    <Pressable style={styles.listContainer} onPress={handelListPress}>
+    <Pressable style={styles.listContainer} onPress={onPress}>
       <View style={styles.rowView}>
         <View>
           <Image source={uri ? uri : imgUrl} />

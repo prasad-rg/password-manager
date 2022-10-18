@@ -35,7 +35,10 @@ const PasswordManagerScreen = ({navigation}) => {
             </View>
             <Text style={styles.category}>Social Media</Text>
           </View>
-          <ListView />
+          <ListView
+            onPress={() => navigation.navigate('SiteDetailsScreen')}
+            copyPasswordText={() => alert('hello 1')}
+          />
           <ListView />
           <ListView />
           <ListView />
