@@ -1,32 +1,35 @@
 import React from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 
-const FormField = ({label = 'URL', onChangeText}) => {
+const TextArea = ({label = 'URL', onChangeText}) => {
   return (
-    <View style={styles.formContainer}>
+    <View style={styles.textAreaContainer}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={styles.formField}
+        style={styles.textArea}
         placeholderTextColor="#3C4858"
         onChangeText={onChangeText}
+        numberOfLines={10}
+        multiline={true}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  formField: {
+  textArea: {
     backgroundColor: '#F5F7FB',
     width: '90%',
-    height: 41,
     borderWidth: 1,
     borderColor: '#D7D7D7',
     paddingLeft: 6,
     borderRadius: 4,
     marginTop: 10.5,
     color: '#3C4858',
+    height: 61,
+    justifyContent: 'flex-start',
   },
-  formContainer: {
+  textAreaContainer: {
     width: '95%',
     marginTop: 20,
   },
@@ -36,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FormField;
+export default TextArea;

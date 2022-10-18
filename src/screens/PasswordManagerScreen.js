@@ -14,7 +14,7 @@ import dataSyncIcon from '../../assets/images/sync_icn.png';
 import profileIcon from '../../assets/images/profile.png';
 import ListView from '../components/ListView';
 import FloatingActionButton from '../components/FloatingActionButton';
-const PasswordManagerScreen = () => {
+const PasswordManagerScreen = ({navigation}) => {
   return (
     <View style={styles.statusbarColor}>
       <SafeAreaView style={styles.container}>
@@ -41,7 +41,7 @@ const PasswordManagerScreen = () => {
           <ListView />
           <ListView />
         </View>
-        <FloatingActionButton onPress={() => alert('Im working')} />
+        <FloatingActionButton onPress={() => navigation.navigate('AddSite')} />
       </SafeAreaView>
     </View>
   );
