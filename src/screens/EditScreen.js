@@ -15,10 +15,7 @@ const EditSiteValidationSchema = yup.object().shape({
     .string()
     .required('Please Enter a valid URL')
     .required('URL is Required'),
-  sitePassword: yup
-    .string()
-    .min(8, ({min}) => `Password must be at least ${min} characters`)
-    .required('Password is required'),
+  sitePassword: yup.string().required('Password is required'),
 });
 
 const EditScreen = ({navigation, route}) => {

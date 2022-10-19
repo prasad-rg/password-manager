@@ -25,6 +25,7 @@ const FormField = ({
           editable={editable}
           secureTextEntry={isPasswordNotVisible}
           name={name}
+          autoCapitalize="none"
         />
         {isPasswordField && (
           <Icon

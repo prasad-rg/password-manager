@@ -10,6 +10,8 @@ const Input = ({
   secureTextEntry,
   onPress,
   isPasswordField,
+  name,
+  keyboardType,
 }) => {
   const [isMpinVisible, setIsMpinVisible] = useState(false);
   return (
@@ -21,6 +23,9 @@ const Input = ({
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={isMpinVisible}
+        autoCapitalize="none"
+        name={name}
+        keyboardType={keyboardType}
       />
       {isPasswordField && (
         <Icon
@@ -47,10 +52,12 @@ const styles = StyleSheet.create({
     paddingLeft: 22,
     paddingVertical: 15,
     fontFamily: 'OpenSans-Semibold',
+    color: '#787E8C',
   },
   icon: {
     position: 'absolute',
-    right: 22,
+    right: 29,
+    marginTop: 30,
   },
   inputContainer: {
     justifyContent: 'center',

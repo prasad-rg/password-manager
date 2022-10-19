@@ -1,26 +1,92 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text, Alert} from 'react-native';
 import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import {Formik} from 'formik';
+import * as yup from 'yup';
+import Toast from 'react-native-simple-toast';
+import {storeData, validateCredentials} from '../utils/asyncStore';
 
-const SignUpScreen = () => {
+const loginValidationSchema = yup.object().shape({
+  mobileNumber: yup
+    .string()
+    .matches(/(\d){10}\b/, 'Enter a valid phone number')
+    .max(10, ({max}) => `Mobile Number must be ${max} characters`)
+    .required('Mobile Number is required'),
+  mPin: yup
+    .string()
+    .max(4, ({min}) => `MPin must be at least ${min} characters`)
+    .matches(/(\d){4}\b/, 'Enter a valid 4 digit MPin')
+    .required('MPin is required'),
+});
+
+const SignUpScreen = ({navigation}) => {
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
         <View style={styles.singUpComponentHolder}>
-          <Input placeholder="Enter Mobile Number" />
-          <Input
-            placeholder="Enter 4 digit MPin"
-            style={styles.mPinInput}
-            isPasswordField={true}
-          />
-          <Input
-            placeholder="Re-Enter 4 digit MPin"
-            style={styles.mPinInput}
-            isPasswordField={true}
-          />
-          <Button title="SIGN IN" style={styles.button} />
+          <Formik
+            validationSchema={loginValidationSchema}
+            initialValues={{mPin: '', mobileNumber: '', confirmMPin: ''}}
+            onSubmit={async values => {
+              await storeData(values);
+              if (await validateCredentials(values)) {
+                Toast.show(
+                  '\t Congrtats!!! Success \n    Signed Up  to access the vault',
+                );
+                navigation.replace('PasswordManager');
+              } else {
+                Alert.alert('Invalid Credentials');
+              }
+            }}>
+            {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+              <>
+                <Input
+                  placeholder="Enter Mobile Number"
+                  name="mobileNumber"
+                  onChangeText={handleChange('mobileNumber')}
+                  value={values.mobileNumber}
+                  keyboardType="number-pad"
+                  onBlur={handleBlur('mobileNumber')}
+                />
+                {errors.mobileNumber && (
+                  <Text style={styles.errorText}>{errors.mobileNumber}</Text>
+                )}
+                <Input
+                  placeholder="Enter 4 digit MPin"
+                  style={styles.mPinInput}
+                  isPasswordField={true}
+                  name="mPin"
+                  onChangeText={handleChange('mPin')}
+                  value={values.mPin}
+                  keyboardType="number-pad"
+                  onBlur={handleBlur('mPin')}
+                />
+                {errors.mPin && (
+                  <Text style={styles.errorText}>{errors.mPin}</Text>
+                )}
+                <Input
+                  placeholder="Re-Enter 4 digit MPin"
+                  style={styles.mPinInput}
+                  isPasswordField={true}
+                  name="confirmMPin"
+                  onChangeText={handleChange('confirmMPin')}
+                  value={values.confirmMPin}
+                  keyboardType="number-pad"
+                  onBlur={handleBlur('confirmMPin')}
+                />
+                {errors.confirmMPin && (
+                  <Text style={styles.errorText}>{errors.confirmMPin}</Text>
+                )}
+                <Button
+                  title="SIGN IN"
+                  style={styles.button}
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
         </View>
       </View>
     </KeyboardAvoidingComponent>
@@ -63,6 +129,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 13,
     textAlign: 'left',
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
   },
 });
 
