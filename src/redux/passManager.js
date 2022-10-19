@@ -72,8 +72,14 @@ export const passManagerSlice = createSlice({
         return passwordObject;
       });
     },
+    deletePassword: (state, action) => {
+      state.value = state.value.filter(
+        passwordDetails => passwordDetails.id !== action.payload,
+      );
+    },
   },
 });
 
-export const {addNewPassword, updatePasswordDetails} = passManagerSlice.actions;
+export const {addNewPassword, updatePasswordDetails, deletePassword} =
+  passManagerSlice.actions;
 export default passManagerSlice.reducer;

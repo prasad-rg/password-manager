@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import imgUrl from '../../assets/images/Bitmap.png';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,25 +17,31 @@ const ListView = ({
   copyPasswordText,
   handelListPress,
   onPress,
+  onLongPress,
 }) => {
   return (
-    <Pressable style={styles.listContainer} onPress={onPress}>
-      <View style={styles.rowView}>
-        <View>
-          <Image source={uri ? uri : imgUrl} />
+    <TouchableOpacity
+      style={styles.listContainer}
+      onPress={onPress}
+      onLongPress={onLongPress}>
+      <>
+        <View style={styles.rowView}>
+          <View>
+            <Image source={uri ? uri : imgUrl} />
+          </View>
+          <View>
+            <Text style={styles.siteText}>{title}</Text>
+            <Pressable onPress={copyPasswordText} style={styles.passwordText}>
+              <MaterialIcons size={17} name={'flip-to-back'} color="#0E85FF" />
+              <Text style={styles.copyPasswordText}>Copy Password</Text>
+            </Pressable>
+          </View>
         </View>
-        <View>
-          <Text style={styles.siteText}>{title}</Text>
-          <Pressable onPress={copyPasswordText} style={styles.passwordText}>
-            <MaterialIcons size={17} name={'flip-to-back'} color="#0E85FF" />
-            <Text style={styles.copyPasswordText}>Copy Password</Text>
-          </Pressable>
+        <View style={styles.urlContainer}>
+          <Text style={styles.urlText}>{url}</Text>
         </View>
-      </View>
-      <View style={styles.urlContainer}>
-        <Text style={styles.urlText}>{url}</Text>
-      </View>
-    </Pressable>
+      </>
+    </TouchableOpacity>
   );
 };
 

@@ -16,20 +16,36 @@ import dataSyncIcon from '../../assets/images/sync_icn.png';
 import profileIcon from '../../assets/images/profile.png';
 import ListView from '../components/ListView';
 import FloatingActionButton from '../components/FloatingActionButton';
-import {data} from '../../data/data';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useDispatch, useSelector} from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Toast from 'react-native-simple-toast';
+import {deletePassword} from '../redux/passManager';
 
 const PasswordManagerScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const {value} = useSelector(state => state.passManager);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const confirmAlert = item =>
+    Alert.alert(
+      'Delete',
+      `Do you want to delete password for ${item.title} ?`,
+      [
+        {
+          text: 'Cancel',
+        },
+        {text: 'OK', onPress: () => dispatch(deletePassword(item.id))},
+      ],
+    );
   const copyToClipboard = sitePassword => {
     Clipboard.setString(sitePassword);
-    Alert.alert(sitePassword);
+    Toast.show('Copied to clipboard');
   };
-
+  const handelDelete = item => {
+    // dispatch(deletePassword(id));
+    confirmAlert(item);
+  };
   const renderItem = ({item}) => {
     return (
       <ListView
@@ -38,6 +54,7 @@ const PasswordManagerScreen = ({navigation}) => {
         url={item.siteName}
         onPress={() => navigation.navigate('SiteDetailsScreen', {item})}
         copyPasswordText={() => copyToClipboard(item.sitePassword)}
+        onLongPress={() => handelDelete(item)}
       />
     );
   };
