@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
+import {View, StyleSheet, Text, Pressable} from 'react-native';
 import {Formik} from 'formik';
 import {useDispatch} from 'react-redux';
 import uuid from 'react-native-uuid';

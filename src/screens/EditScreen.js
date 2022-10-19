@@ -7,6 +7,7 @@ import FormField from '../components/FormField';
 import TextArea from '../components/TextArea';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as yup from 'yup';
+import Toast from 'react-native-simple-toast';
 import {updatePasswordDetails} from '../redux/passManager';
 
 const EditSiteValidationSchema = yup.object().shape({
@@ -53,6 +54,7 @@ const EditScreen = ({navigation, route}) => {
             };
             dispatch(updatePasswordDetails(values));
             navigation.navigate('PasswordManager');
+            Toast.show('Updated Successfully');
           }}
           onReset={({resetForm}) => resetForm()}>
           {({

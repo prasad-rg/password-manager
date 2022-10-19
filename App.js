@@ -1,29 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
 import AppStack from './src/navigation/AppStack';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
-import SearchBar from './src/components/SearchBar';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
+
+let persistor = persistStore(store);
 
 const App = () => {
   return (
     <Provider store={store}>
-      <AppStack />
+      <PersistGate persistor={persistor}>
+        <AppStack />
+      </PersistGate>
     </Provider>
   );
-  // return (
-  //   <View style={styles.container}>
-  //     <SearchBar />
-  //   </View>
-  // );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: '#0E85FF',
-  },
-});
 export default App;

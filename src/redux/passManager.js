@@ -6,8 +6,6 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const IMAGES_ICONS = [faceBookIcon, insta, twitter, youtube];
 
-import {data} from '../../data/data';
-
 const initialValue = [
   {
     id: '1',

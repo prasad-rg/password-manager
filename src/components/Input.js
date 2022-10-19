@@ -27,6 +27,7 @@ const Input = ({
           name={isMpinVisible ? 'eye' : 'eye-with-line'}
           style={styles.icon}
           size={28}
+          color="#787E8C"
           onPress={() => {
             setIsMpinVisible(!isMpinVisible);
           }}
