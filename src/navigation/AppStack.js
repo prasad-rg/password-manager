@@ -6,6 +6,7 @@ import AddSiteScreen from '../screens/AddSiteScreen';
 import SiteDetailsScreen from '../screens/SiteDetailsScreen';
 import EditScreen from '../screens/EditScreen';
 import AuthTabNavigator from './AuthTabNavigator';
+import RNBootSplash from 'react-native-bootsplash';
 const Stack = createNativeStackNavigator();
 
 const MyTheme = {
@@ -18,7 +19,7 @@ const MyTheme = {
 
 const AppStack = () => {
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={MyTheme} onReady={() => RNBootSplash.hide()}>
       <Stack.Navigator>
         <Stack.Screen
           name="Auth"
