@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import AppStack from './src/navigation/AppStack';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import SearchBar from './src/components/SearchBar';
 
 const App = () => {
   return (
@@ -10,7 +11,11 @@ const App = () => {
       <AppStack />
     </Provider>
   );
-  // return <AuthTabNavigator />;
+  // return (
+  //   <View style={styles.container}>
+  //     <SearchBar />
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({

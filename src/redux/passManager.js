@@ -63,15 +63,6 @@ export const passManagerSlice = createSlice({
   reducers: {
     addNewPassword: (state, action) => {
       state.value.push(action.payload);
-      console.log(state.value);
-    },
-    switchStatus: (state, action) => {
-      state.value = state.value.map(todoItem => {
-        if (todoItem.id === action.payload) {
-          todoItem.status = !todoItem.status;
-        }
-        return todoItem;
-      });
     },
     updatePasswordDetails: (state, action) => {
       state.value = state.value.map(passwordObject => {
@@ -80,11 +71,6 @@ export const passManagerSlice = createSlice({
         }
         return passwordObject;
       });
-    },
-    deleteTodo: (state, action) => {
-      state.value = state.value.filter(
-        todoItem => todoItem.id !== action.payload,
-      );
     },
   },
 });

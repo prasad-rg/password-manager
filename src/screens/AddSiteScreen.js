@@ -8,6 +8,7 @@ import TextArea from '../components/TextArea';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as yup from 'yup';
 import {addNewPassword} from '../redux/passManager';
+import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 
 const AddSiteValidationSchema = yup.object().shape({
   url: yup
@@ -24,100 +25,104 @@ const AddSiteScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.navBar}>
-        <Pressable
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back-outline" size={24} color="#FFFFFF" />
-        </Pressable>
-        <Text style={styles.headerText}>Add Site</Text>
+    <KeyboardAvoidingComponent>
+      <View style={styles.container}>
+        <View style={styles.navBar}>
+          <Pressable
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}>
+            <Icon name="arrow-back-outline" size={24} color="#FFFFFF" />
+          </Pressable>
+          <Text style={styles.headerText}>Add Site</Text>
+        </View>
+        <Formik
+          validationSchema={AddSiteValidationSchema}
+          initialValues={{
+            url: '',
+            sitePassword: '',
+            folder: '',
+            userName: '',
+            siteName: '',
+            notes: '',
+          }}
+          onSubmit={(values, {resetForm}) => {
+            values = {
+              ...values,
+              id: uuid.v4(),
+              icon: '',
+              title: values.siteName.substring(4, values.siteName.length - 4),
+            };
+            dispatch(addNewPassword(values));
+            navigation.navigate('PasswordManager');
+          }}
+          onReset={({resetForm}) => resetForm()}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            handleReset,
+          }) => (
+            <>
+              <View style={styles.formFieldContainer}>
+                <FormField
+                  label="URL"
+                  name="url"
+                  onChangeText={handleChange('url')}
+                  value={values.url}
+                />
+                {errors.url && (
+                  <Text style={styles.errorText}>{errors.url}</Text>
+                )}
+                <FormField
+                  label="Site Name"
+                  name="siteName"
+                  onChangeText={handleChange('siteName')}
+                  value={values.siteName}
+                />
+                <FormField
+                  label="Sector/Folder"
+                  name="folder"
+                  onChangeText={handleChange('folder')}
+                  value={values.folder}
+                />
+                <FormField
+                  label="User Name"
+                  name="userName "
+                  onChangeText={handleChange('userName')}
+                  value={values.userName}
+                />
+                <FormField
+                  label="Site Password"
+                  name="sitePassword"
+                  onChangeText={handleChange('sitePassword')}
+                  value={values.sitePassword}
+                  secureTextEntry={true}
+                />
+                {errors.sitePassword && (
+                  <Text style={styles.errorText}>{errors.sitePassword}</Text>
+                )}
+                <TextArea
+                  label="Notes"
+                  name="notes"
+                  onChangeText={handleChange('notes')}
+                  value={values.notes}
+                />
+              </View>
+              <View style={styles.buttonContainer}>
+                <Pressable style={styles.button} onPress={handleReset}>
+                  <Text style={styles.buttonText}>Reset</Text>
+                </Pressable>
+                <Pressable style={styles.button} onPress={() => handleSubmit()}>
+                  <Text style={styles.buttonText}>Submit</Text>
+                </Pressable>
+              </View>
+            </>
+          )}
+        </Formik>
       </View>
-      <Formik
-        validationSchema={AddSiteValidationSchema}
-        initialValues={{
-          url: '',
-          sitePassword: '',
-          folder: '',
-          userName: '',
-          siteName: '',
-          notes: '',
-        }}
-        onSubmit={(values, {resetForm}) => {
-          values = {
-            ...values,
-            id: uuid.v4(),
-            icon: '',
-            title: values.siteName.substring(4, values.siteName.length - 4),
-          };
-          dispatch(addNewPassword(values));
-          navigation.navigate('PasswordManager');
-        }}
-        onReset={({resetForm}) => resetForm()}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          handleReset,
-        }) => (
-          <>
-            <View style={styles.formFieldContainer}>
-              <FormField
-                label="URL"
-                name="url"
-                onChangeText={handleChange('url')}
-                value={values.url}
-              />
-              {errors.url && <Text style={styles.errorText}>{errors.url}</Text>}
-              <FormField
-                label="Site Name"
-                name="siteName"
-                onChangeText={handleChange('siteName')}
-                value={values.siteName}
-              />
-              <FormField
-                label="Sector/Folder"
-                name="folder"
-                onChangeText={handleChange('folder')}
-                value={values.folder}
-              />
-              <FormField
-                label="User Name"
-                name="userName "
-                onChangeText={handleChange('userName')}
-                value={values.userName}
-              />
-              <FormField
-                label="Site Password"
-                name="sitePassword"
-                onChangeText={handleChange('sitePassword')}
-                value={values.sitePassword}
-                secureTextEntry={true}
-              />
-              {errors.sitePassword && (
-                <Text style={styles.errorText}>{errors.sitePassword}</Text>
-              )}
-              <TextArea
-                label="Notes"
-                name="notes"
-                onChangeText={handleChange('notes')}
-                value={values.notes}
-              />
-            </View>
-            <View style={styles.buttonContainer}>
-              <Pressable style={styles.button} onPress={handleReset}>
-                <Text style={styles.buttonText}>Reset</Text>
-              </Pressable>
-              <Pressable style={styles.button} onPress={() => handleSubmit()}>
-                <Text style={styles.buttonText}>Submit</Text>
-              </Pressable>
-            </View>
-          </>
-        )}
-      </Formik>
-    </ScrollView>
+    </KeyboardAvoidingComponent>
   );
 };
 
@@ -139,15 +144,16 @@ const styles = StyleSheet.create({
     marginLeft: 32,
   },
   formFieldContainer: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     marginTop: 5,
     marginLeft: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginTop: 43,
-    marginBottom: 40,
+    // marginTop: 43,
+    // marginBottom: 40,
+    bottom: -100,
   },
   button: {
     width: '50%',

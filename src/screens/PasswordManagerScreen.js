@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   FlatList,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import burgerMenuIcon from '../../assets/images/burger_menu.png';
 import passManagerIcon from '../../assets/images/PASS_MANAGER.png';
@@ -18,10 +19,11 @@ import FloatingActionButton from '../components/FloatingActionButton';
 import {data} from '../../data/data';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useDispatch, useSelector} from 'react-redux';
+import SearchBar from '../components/SearchBar';
 
 const PasswordManagerScreen = ({navigation}) => {
   const {value} = useSelector(state => state.passManager);
-
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
   const copyToClipboard = sitePassword => {
     Clipboard.setString(sitePassword);
     Alert.alert(sitePassword);
@@ -44,12 +46,17 @@ const PasswordManagerScreen = ({navigation}) => {
           <Image source={burgerMenuIcon} style={styles.burgerMenuIcon} />
           <View style={styles.header}>
             <Image source={passManagerIcon} style={styles.passManagerIcon} />
-            <Image source={searchIcon} style={styles.commonIcon} />
+            <TouchableOpacity
+              onPress={() => setIsSearchClicked(!isSearchClicked)}>
+              <Image source={searchIcon} style={styles.commonIcon} />
+            </TouchableOpacity>
             <Image source={dataSyncIcon} style={styles.commonIcon} />
             <Image source={profileIcon} style={styles.commonIcon} />
           </View>
         </View>
-        <View style={styles.listItemContainer}>
+        {isSearchClicked ? (
+          <SearchBar />
+        ) : (
           <View style={styles.textHeaderContainer}>
             <View>
               <Text style={styles.headerText}>Sites</Text>
@@ -57,6 +64,8 @@ const PasswordManagerScreen = ({navigation}) => {
             </View>
             <Text style={styles.category}>Social Media</Text>
           </View>
+        )}
+        <View style={styles.listItemContainer}>
           <FlatList
             data={value}
             renderItem={renderItem}
@@ -71,6 +80,7 @@ const PasswordManagerScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   statusbarColor: {
     flex: 1,
