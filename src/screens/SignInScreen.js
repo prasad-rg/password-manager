@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -7,12 +7,18 @@ import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import Toast from 'react-native-simple-toast';
 
 const SignInScreen = ({navigation}) => {
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
         <View style={styles.singInComponentHolder}>
           <Input placeholder="Mobile Number" />
-          <Input placeholder="MPin" style={styles.mPinInput} />
+          <Input
+            placeholder="MPin"
+            style={styles.mPinInput}
+            isPasswordField={true}
+          />
           <Pressable>
             <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
           </Pressable>
@@ -23,7 +29,7 @@ const SignInScreen = ({navigation}) => {
               Toast.show(
                 '\t Congrtats!!! Success \n    Signin  to access the vault',
               );
-              navigation.navigate('PasswordManager');
+              navigation.replace('PasswordManager');
             }}
           />
           <View style={styles.fingerprintIconContiner}>

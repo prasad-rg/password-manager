@@ -99,7 +99,7 @@ const AddSiteScreen = ({navigation}) => {
                   name="sitePassword"
                   onChangeText={handleChange('sitePassword')}
                   value={values.sitePassword}
-                  secureTextEntry={true}
+                  isPasswordField={true}
                 />
                 {errors.sitePassword && (
                   <Text style={styles.errorText}>{errors.sitePassword}</Text>
@@ -131,6 +131,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  test: {
+    flex: 1,
+    justifyContent: 'space-between',
+    borderWidth: 1,
+  },
   navBar: {
     flexDirection: 'row',
     width: '100%',
@@ -152,9 +157,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    // marginTop: 43,
+    marginTop: '25%',
     // marginBottom: 40,
-    bottom: -100,
+    // bottom: -50,
   },
   button: {
     width: '50%',

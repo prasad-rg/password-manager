@@ -22,6 +22,7 @@ import SearchBar from '../components/SearchBar';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-simple-toast';
 import {deletePassword} from '../redux/passManager';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const PasswordManagerScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -61,50 +62,56 @@ const PasswordManagerScreen = ({navigation}) => {
 
   return (
     <View style={styles.statusbarColor}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.navBar}>
-          <Image source={burgerMenuIcon} style={styles.burgerMenuIcon} />
-          <View style={styles.header}>
-            <Image source={passManagerIcon} style={styles.passManagerIcon} />
-            <TouchableOpacity
-              onPress={() => setIsSearchClicked(!isSearchClicked)}>
-              <Image source={searchIcon} style={styles.commonIcon} />
-            </TouchableOpacity>
-            <Image source={dataSyncIcon} style={styles.commonIcon} />
-            <Image source={profileIcon} style={styles.commonIcon} />
-          </View>
-        </View>
-        {isSearchClicked ? (
-          <SearchBar />
-        ) : (
-          <View style={styles.textHeaderContainer}>
-            <View>
-              <Text style={styles.headerText}>Sites</Text>
-              <View style={styles.bottomBorder} />
+      <Pressable
+        style={styles.container}
+        onPress={() => setIsSearchClicked(false)}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.navBar}>
+            <Image source={burgerMenuIcon} style={styles.burgerMenuIcon} />
+            <View style={styles.header}>
+              <Image source={passManagerIcon} style={styles.passManagerIcon} />
+              <TouchableOpacity
+                onPress={() => setIsSearchClicked(!isSearchClicked)}>
+                <Image source={searchIcon} style={styles.commonIcon} />
+              </TouchableOpacity>
+              <Image source={dataSyncIcon} style={styles.commonIcon} />
+              <Image source={profileIcon} style={styles.commonIcon} />
             </View>
-            <View style={styles.categoryContainer}>
-              <Text style={styles.category}>Social Media</Text>
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{value.length}</Text>
+          </View>
+          {isSearchClicked ? (
+            <SearchBar />
+          ) : (
+            <View style={styles.textHeaderContainer}>
+              <View>
+                <Text style={styles.headerText}>Sites</Text>
+                <View style={styles.bottomBorder} />
               </View>
-              <Icon
-                color="#0E85FF"
-                name="keyboard-arrow-down"
-                size={22}
-                style={styles.dropDown}
-              />
+              <View style={styles.categoryContainer}>
+                <Text style={styles.category}>Social Media</Text>
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{value.length}</Text>
+                </View>
+                <Icon
+                  color="#0E85FF"
+                  name="keyboard-arrow-down"
+                  size={22}
+                  style={styles.dropDown}
+                />
+              </View>
             </View>
+          )}
+          <View style={styles.listItemContainer}>
+            <FlatList
+              data={value}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
           </View>
-        )}
-        <View style={styles.listItemContainer}>
-          <FlatList
-            data={value}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
+          <FloatingActionButton
+            onPress={() => navigation.navigate('AddSite')}
           />
-        </View>
-        <FloatingActionButton onPress={() => navigation.navigate('AddSite')} />
-      </SafeAreaView>
+        </SafeAreaView>
+      </Pressable>
     </View>
   );
 };

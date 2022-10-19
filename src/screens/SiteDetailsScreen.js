@@ -46,7 +46,7 @@ const SiteDetailsScreen = ({navigation, route}) => {
             label="Site Password"
             value={siteDetails.sitePassword}
             editable={false}
-            secureTextEntry={true}
+            isPasswordField={true}
           />
           <TextArea label="Notes" value={siteDetails.notes} editable={false} />
         </View>

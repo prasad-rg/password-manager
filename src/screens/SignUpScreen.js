@@ -10,8 +10,16 @@ const SignUpScreen = () => {
       <View style={styles.container}>
         <View style={styles.singUpComponentHolder}>
           <Input placeholder="Enter Mobile Number" />
-          <Input placeholder="Enter 4 digit MPin" style={styles.mPinInput} />
-          <Input placeholder="Re-Enter 4 digit MPin" style={styles.mPinInput} />
+          <Input
+            placeholder="Enter 4 digit MPin"
+            style={styles.mPinInput}
+            isPasswordField={true}
+          />
+          <Input
+            placeholder="Re-Enter 4 digit MPin"
+            style={styles.mPinInput}
+            isPasswordField={true}
+          />
           <Button title="SIGN IN" style={styles.button} />
         </View>
       </View>

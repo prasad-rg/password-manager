@@ -88,8 +88,8 @@ const EditScreen = ({navigation, route}) => {
                 <FormField
                   label="Site Password"
                   value={values.sitePassword}
-                  secureTextEntry={true}
                   onChangeText={handleChange('sitePassword')}
+                  isPasswordField={true}
                 />
                 <TextArea
                   label="Notes"
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginTop: 43,
+    marginTop: '25%',
     marginBottom: 0,
   },
   button: {

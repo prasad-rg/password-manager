@@ -1,15 +1,38 @@
-import React from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, TextInput, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 
-const Input = ({placeholder = 'Enter Here', style, value, onChangeText}) => {
+const Input = ({
+  placeholder = 'Enter Here',
+  style,
+  value,
+  onChangeText,
+  secureTextEntry,
+  onPress,
+  isPasswordField,
+}) => {
+  const [isMpinVisible, setIsMpinVisible] = useState(false);
   return (
-    <TextInput
-      placeholder={placeholder}
-      placeholderTextColor="#787E8C"
-      style={[styles.textInput, {...style}]}
-      value={value}
-      onChangeText={onChangeText}
-    />
+    <View style={styles.inputContainer}>
+      <TextInput
+        placeholder={placeholder}
+        placeholderTextColor="#787E8C"
+        style={[styles.textInput, {...style}]}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={isMpinVisible}
+      />
+      {isPasswordField && (
+        <Icon
+          name={isMpinVisible ? 'eye' : 'eye-with-line'}
+          style={styles.icon}
+          size={28}
+          onPress={() => {
+            setIsMpinVisible(!isMpinVisible);
+          }}
+        />
+      )}
+    </View>
   );
 };
 
@@ -23,6 +46,13 @@ const styles = StyleSheet.create({
     paddingLeft: 22,
     paddingVertical: 15,
     fontFamily: 'OpenSans-Semibold',
+  },
+  icon: {
+    position: 'absolute',
+    right: 22,
+  },
+  inputContainer: {
+    justifyContent: 'center',
   },
 });
 
