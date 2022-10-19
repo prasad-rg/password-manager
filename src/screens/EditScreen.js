@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   navBar: {
     flexDirection: 'row',
-    width: 400,
+    width: '100%',
     height: 76,
     backgroundColor: '#0E85FF',
     paddingTop: 41,

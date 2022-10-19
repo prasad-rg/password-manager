@@ -20,6 +20,7 @@ import {data} from '../../data/data';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useDispatch, useSelector} from 'react-redux';
 import SearchBar from '../components/SearchBar';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PasswordManagerScreen = ({navigation}) => {
   const {value} = useSelector(state => state.passManager);
@@ -29,15 +30,17 @@ const PasswordManagerScreen = ({navigation}) => {
     Alert.alert(sitePassword);
   };
 
-  const renderItem = ({item}) => (
-    <ListView
-      title={item.title}
-      uri={item.icon}
-      url={item.siteName}
-      onPress={() => navigation.navigate('SiteDetailsScreen', {item})}
-      copyPasswordText={() => copyToClipboard(item.sitePassword)}
-    />
-  );
+  const renderItem = ({item}) => {
+    return (
+      <ListView
+        title={item.title}
+        uri={item.icon}
+        url={item.siteName}
+        onPress={() => navigation.navigate('SiteDetailsScreen', {item})}
+        copyPasswordText={() => copyToClipboard(item.sitePassword)}
+      />
+    );
+  };
 
   return (
     <View style={styles.statusbarColor}>
@@ -62,7 +65,18 @@ const PasswordManagerScreen = ({navigation}) => {
               <Text style={styles.headerText}>Sites</Text>
               <View style={styles.bottomBorder} />
             </View>
-            <Text style={styles.category}>Social Media</Text>
+            <View style={styles.categoryContainer}>
+              <Text style={styles.category}>Social Media</Text>
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{value.length}</Text>
+              </View>
+              <Icon
+                color="#0E85FF"
+                name="keyboard-arrow-down"
+                size={22}
+                style={styles.dropDown}
+              />
+            </View>
           </View>
         )}
         <View style={styles.listItemContainer}>
@@ -88,7 +102,7 @@ const styles = StyleSheet.create({
   },
   navBar: {
     flexDirection: 'row',
-    width: 400,
+    width: '100%',
     height: 56,
     backgroundColor: '#0E85FF',
     padding: 18,
@@ -144,10 +158,19 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    width: 29,
+    height: 29,
   },
   badgeText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontFamily: 'OpenSans-Semibold',
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+  },
+  dropDown: {
+    marginLeft: 6.8,
   },
 });
 

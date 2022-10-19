@@ -75,11 +75,5 @@ export const passManagerSlice = createSlice({
   },
 });
 
-export const {
-  addNewPassword,
-  updatePasswordDetails,
-  switchStatus,
-  editTodo,
-  deleteTodo,
-} = passManagerSlice.actions;
+export const {addNewPassword, updatePasswordDetails} = passManagerSlice.actions;
 export default passManagerSlice.reducer;
