@@ -29,7 +29,7 @@ const initialValue = [
     sitePassword: '12345678',
     notes: '',
     icon: IMAGES_ICONS[2],
-    title: 'twitter',
+    title: 'Twitter',
   },
   {
     id: '3',

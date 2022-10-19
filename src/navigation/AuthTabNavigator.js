@@ -5,6 +5,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import logo from '../../assets/images/logo.png';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 
 const Tab = createMaterialTopTabNavigator();
 

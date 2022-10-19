@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as yup from 'yup';
 import {addNewPassword} from '../redux/passManager';
 import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
-
+import Toast from 'react-native-simple-toast';
 const AddSiteValidationSchema = yup.object().shape({
   url: yup
     .string()
@@ -54,6 +54,7 @@ const AddSiteScreen = ({navigation}) => {
             };
             dispatch(addNewPassword(values));
             navigation.navigate('PasswordManager');
+            Toast.show('Saved Successfully');
           }}
           onReset={({resetForm}) => resetForm()}>
           {({

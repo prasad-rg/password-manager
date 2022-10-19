@@ -3,32 +3,43 @@ import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import fingerprintIcon from '../../assets/images/fingerprintIcon.png';
+import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
+import Toast from 'react-native-simple-toast';
 
 const SignInScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.singInComponentHolder}>
-        <Input placeholder="Mobile Number" />
-        <Input placeholder="MPin" style={styles.mPinInput} />
-        <Pressable>
-          <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
-        </Pressable>
-        <Button
-          title="SIGN IN"
-          style={styles.button}
-          onPress={() => navigation.navigate('PasswordManager')}
-        />
-        <View style={styles.fingerprintIconContiner}>
-          <Image source={fingerprintIcon} />
+    <KeyboardAvoidingComponent>
+      <View style={styles.container}>
+        <View style={styles.singInComponentHolder}>
+          <Input placeholder="Mobile Number" />
+          <Input placeholder="MPin" style={styles.mPinInput} />
+          <Pressable>
+            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+          </Pressable>
+          <Button
+            title="SIGN IN"
+            style={styles.button}
+            onPress={() => {
+              Toast.show(
+                '\t Congrtats!!! Success \n    Signin  to access the vault',
+              );
+              navigation.navigate('PasswordManager');
+            }}
+          />
+          <View style={styles.fingerprintIconContiner}>
+            <Image source={fingerprintIcon} />
+          </View>
+          <Pressable>
+            <Text style={styles.boldText}>
+              OR {'\t'}
+              <Text style={styles.plainText}>
+                USE YOUR FINGERPRINT TO LOGIN
+              </Text>
+            </Text>
+          </Pressable>
         </View>
-        <Pressable>
-          <Text style={styles.boldText}>
-            OR {'\t'}
-            <Text style={styles.plainText}>USE YOUR FINGERPRINT TO LOGIN</Text>
-          </Text>
-        </Pressable>
       </View>
-    </View>
+    </KeyboardAvoidingComponent>
   );
 };
 
