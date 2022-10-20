@@ -23,8 +23,6 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const SignInScreen = ({navigation}) => {
-  // const [secureTextEntry, setSecureTextEntry] = useState(true);
-
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
@@ -33,9 +31,6 @@ const SignInScreen = ({navigation}) => {
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: ''}}
             onSubmit={async values => {
-              // await storeData(values);
-              // const res = await getData(values.mobileNumber);
-              // console.log(res);
               if (await validateCredentials(values)) {
                 Toast.show(
                   '\t Congrtats!!! Success \n    Signin  to access the vault',

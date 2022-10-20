@@ -69,6 +69,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     paddingTop: 41,
     justifyContent: 'space-between',
+    shadowColor: '#3C4857',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 20,
   },
   headerText: {
     color: '#FFFFFF',

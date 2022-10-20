@@ -131,6 +131,11 @@ const styles = StyleSheet.create({
     height: 56,
     backgroundColor: '#0E85FF',
     padding: 18,
+    shadowColor: '#3C4857',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 20,
   },
   header: {
     flex: 1,
