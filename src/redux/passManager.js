@@ -86,6 +86,17 @@ export const passManagerSlice = createSlice({
           .includes(action.payload.toLowerCase()),
       );
     },
+    dropDownFilter: (state, action) => {
+      if (action.payload === 'All') {
+        state.value = state.preValue;
+      } else {
+        state.value = state.preValue.filter(passwordDetails =>
+          passwordDetails.folder
+            .toLowerCase()
+            .includes(action.payload.toLowerCase()),
+        );
+      }
+    },
   },
 });
 
@@ -94,5 +105,6 @@ export const {
   updatePasswordDetails,
   deletePassword,
   filterList,
+  dropDownFilter,
 } = passManagerSlice.actions;
 export default passManagerSlice.reducer;

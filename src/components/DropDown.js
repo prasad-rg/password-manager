@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {dropDownFilter} from '../redux/passManager';
 
 const DropDown = ({
   count = '07',
-  categories = ['Social Media', 'Streaming', 'Work', 'All'],
+  categories = ['All', 'Work', 'Streaming', 'Social Media'],
 }) => {
+  const dispatch = useDispatch();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [category, setCategory] = useState('All');
 
@@ -15,6 +18,7 @@ const DropDown = ({
 
   const handelDropDownSelect = item => {
     setCategory(item);
+    dispatch(dropDownFilter(item));
     handelDropDownPress();
   };
 
