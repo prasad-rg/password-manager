@@ -8,6 +8,7 @@ const DropDown = ({
   count = '07',
   categories = ['All', 'Work', 'Streaming', 'Social Media'],
 }) => {
+  const {value} = useSelector(state => state.passManager);
   const dispatch = useDispatch();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [category, setCategory] = useState('All');
@@ -29,7 +30,11 @@ const DropDown = ({
         onPress={handelDropDownPress}>
         <Text style={styles.category}>{category}</Text>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>{count}</Text>
+          <Text style={styles.badgeText}>
+            {value.length > 0 && value.length < 10
+              ? `0${value.length}`
+              : value.length}
+          </Text>
         </View>
         <Icon
           color="#0E85FF"
