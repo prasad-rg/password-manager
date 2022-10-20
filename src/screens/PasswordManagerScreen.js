@@ -19,7 +19,6 @@ import FloatingActionButton from '../components/FloatingActionButton';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useDispatch, useSelector} from 'react-redux';
 import SearchBar from '../components/SearchBar';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-simple-toast';
 import {deletePassword, filterList} from '../redux/passManager';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
@@ -87,18 +86,6 @@ const PasswordManagerScreen = ({navigation}) => {
                 <View style={styles.bottomBorder} />
               </View>
               <DropDown />
-              {/* <View style={styles.categoryContainer}>
-                <Text style={styles.category}>Social Media</Text>
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{value.length}</Text>
-                </View>
-                <Icon
-                  color="#0E85FF"
-                  name="keyboard-arrow-down"
-                  size={22}
-                  style={styles.dropDown}
-                />
-              </View> */}
             </View>
           )}
           <View style={styles.listItemContainer}>

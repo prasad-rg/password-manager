@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Text, Pressable} from 'react-native';
 import {Formik} from 'formik';
 import {useDispatch} from 'react-redux';
@@ -20,6 +20,7 @@ const AddSiteValidationSchema = yup.object().shape({
 
 const AddSiteScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  const [folder, setFolder] = useState('');
 
   return (
     <KeyboardAvoidingComponent>
@@ -47,6 +48,7 @@ const AddSiteScreen = ({navigation}) => {
               ...values,
               id: uuid.v4(),
               icon: '',
+              folder: folder,
               title: values.siteName.substring(4, values.siteName.length - 4),
             };
             dispatch(addNewPassword(values));
@@ -81,7 +83,10 @@ const AddSiteScreen = ({navigation}) => {
                 <FormField
                   label="Sector/Folder"
                   name="folder"
-                  onChangeText={handleChange('folder')}
+                  isDropDown={true}
+                  onSelect={(selectedItem, index) => {
+                    setFolder(selectedItem);
+                  }}
                   value={values.folder}
                 />
                 <FormField

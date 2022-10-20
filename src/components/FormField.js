@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import FormFieldDropDown from './FormFieldDropDown';
 
 const FormField = ({
   label = 'URL',
@@ -10,35 +11,42 @@ const FormField = ({
   secureTextEntry = false,
   name,
   isPasswordField,
+  isDropDown,
+  onSelect,
+  defaultValue,
 }) => {
   const [isPasswordNotVisible, setIsPasswordNotVisible] =
     useState(isPasswordField);
   return (
     <View style={styles.formContainer}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputText}>
-        <TextInput
-          style={styles.formField}
-          placeholderTextColor="#3C4858"
-          onChangeText={onChangeText}
-          value={value}
-          editable={editable}
-          secureTextEntry={isPasswordNotVisible}
-          name={name}
-          autoCapitalize="none"
-        />
-        {isPasswordField && (
-          <Icon
-            name={isPasswordNotVisible ? 'eye' : 'eye-with-line'}
-            style={styles.icon}
-            color="#787E8C"
-            size={24}
-            onPress={() => {
-              setIsPasswordNotVisible(!isPasswordNotVisible);
-            }}
+      {isDropDown ? (
+        <FormFieldDropDown onSelect={onSelect} defaultValue={defaultValue} />
+      ) : (
+        <View style={styles.inputText}>
+          <TextInput
+            style={styles.formField}
+            placeholderTextColor="#3C4858"
+            onChangeText={onChangeText}
+            value={value}
+            editable={editable}
+            secureTextEntry={isPasswordNotVisible}
+            name={name}
+            autoCapitalize="none"
           />
-        )}
-      </View>
+          {isPasswordField && (
+            <Icon
+              name={isPasswordNotVisible ? 'eye' : 'eye-with-line'}
+              style={styles.icon}
+              color="#787E8C"
+              size={24}
+              onPress={() => {
+                setIsPasswordNotVisible(!isPasswordNotVisible);
+              }}
+            />
+          )}
+        </View>
+      )}
     </View>
   );
 };

@@ -6,6 +6,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import DropDown from './src/components/DropDown';
 import {StyleSheet, View} from 'react-native';
+import FormFieldDropDown from './src/components/FormFieldDropDown';
 
 let persistor = persistStore(store);
 
@@ -17,9 +18,9 @@ const App = () => {
       </PersistGate>
     </Provider>
   );
-  // <View style={styles.container}>
-  //   <DropDown />
-  // </View>
+  //   <View style={styles.container}>
+  //     <FormFieldDropDown />
+  //   </View>
   // );
 };
 
