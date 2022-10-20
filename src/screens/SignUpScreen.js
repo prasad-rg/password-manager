@@ -99,11 +99,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   singUpComponentHolder: {
-    marginTop: 43,
+    marginTop: 14,
     flex: 1,
   },
   mPinInput: {
-    marginVertical: 26,
+    paddingLeft: 26,
   },
   forgotPasswordText: {
     color: '#FFFFFF',

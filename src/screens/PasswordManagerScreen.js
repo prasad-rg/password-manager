@@ -21,7 +21,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-simple-toast';
-import {deletePassword} from '../redux/passManager';
+import {deletePassword, filterList} from '../redux/passManager';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const PasswordManagerScreen = ({navigation}) => {
@@ -79,7 +79,7 @@ const PasswordManagerScreen = ({navigation}) => {
             </View>
           </View>
           {isSearchClicked ? (
-            <SearchBar />
+            <SearchBar onChangeText={text => dispatch(filterList(text))} />
           ) : (
             <View style={styles.textHeaderContainer}>
               <View>

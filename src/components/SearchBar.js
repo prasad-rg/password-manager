@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const SearchBar = ({onPress, onChangeText}) => {
+const SearchBar = ({onPress, onChangeText, value}) => {
   return (
     <View style={styles.searchBar}>
       <TextInput
         placeholder="Type kewords to search"
         onChangeText={onChangeText}
+        value={value}
       />
       <TouchableOpacity onPress={onPress}>
         <Icon name="arrow-forward" size={20} color="#0E85FF" />

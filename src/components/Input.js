@@ -13,7 +13,7 @@ const Input = ({
   name,
   keyboardType,
 }) => {
-  const [isMpinVisible, setIsMpinVisible] = useState(false);
+  const [isMpinVisible, setIsMpinVisible] = useState(isPasswordField);
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -44,23 +44,34 @@ const Input = ({
 
 const styles = StyleSheet.create({
   textInput: {
-    width: '100%',
+    width: '90%',
     height: 54,
-    borderRadius: 4,
-    backgroundColor: '#FFFFFF',
+    // borderRadius: 4,
+    // backgroundColor: '#FFFFFF',
     fontSize: 16,
-    paddingLeft: 22,
-    paddingVertical: 15,
+    // paddingLeft: 22,
+    // paddingVertical: 15,
     fontFamily: 'OpenSans-Semibold',
     color: '#787E8C',
   },
   icon: {
-    position: 'absolute',
-    right: 29,
-    marginTop: 30,
+    // position: 'absolute',
+    // right: 29,
+    // marginTop: 30,
+    paddingRight: 35,
   },
   inputContainer: {
+    width: '100%',
+    height: 54,
+    borderRadius: 4,
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 26,
+    // paddingLeft: 22,
+    // paddingVertical: 15,
   },
 });
 

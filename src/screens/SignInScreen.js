@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   singInComponentHolder: {
-    marginTop: 43,
+    marginTop: 17,
     flex: 1,
   },
   mPinInput: {
-    marginTop: 26,
+    paddingLeft: 26,
   },
   forgotPasswordText: {
     color: '#FFFFFF',
