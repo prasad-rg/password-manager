@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-simple-toast';
 import {deletePassword, filterList} from '../redux/passManager';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import DropDown from '../components/DropDown';
 
 const PasswordManagerScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -85,7 +86,8 @@ const PasswordManagerScreen = ({navigation}) => {
                 <Text style={styles.headerText}>Sites</Text>
                 <View style={styles.bottomBorder} />
               </View>
-              <View style={styles.categoryContainer}>
+              <DropDown />
+              {/* <View style={styles.categoryContainer}>
                 <Text style={styles.category}>Social Media</Text>
                 <View style={styles.badge}>
                   <Text style={styles.badgeText}>{value.length}</Text>
@@ -96,7 +98,7 @@ const PasswordManagerScreen = ({navigation}) => {
                   size={22}
                   style={styles.dropDown}
                 />
-              </View>
+              </View> */}
             </View>
           )}
           <View style={styles.listItemContainer}>
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
   textHeaderContainer: {
     marginVertical: 20,
     marginHorizontal: 20,
-    height: 37,
+    // height: 37,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
