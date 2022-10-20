@@ -44,7 +44,6 @@ const PasswordManagerScreen = ({navigation}) => {
     Toast.show('Copied to clipboard');
   };
   const handelDelete = item => {
-    // dispatch(deletePassword(id));
     confirmAlert(item);
   };
   const renderItem = ({item}) => {

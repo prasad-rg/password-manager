@@ -52,8 +52,7 @@ const AddSiteScreen = ({navigation}) => {
             dispatch(addNewPassword(values));
             navigation.navigate('PasswordManager');
             Toast.show('Saved Successfully');
-          }}
-          onReset={({resetForm}) => resetForm()}>
+          }}>
           {({
             handleChange,
             handleBlur,
