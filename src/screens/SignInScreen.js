@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Pressable, Alert} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import fingerprintIcon from '../../assets/images/fingerprintIcon.png';

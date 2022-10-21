@@ -1,5 +1,12 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Image, StyleSheet} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import logo from '../../assets/images/logo.png';
@@ -31,7 +38,7 @@ const AuthTabNavigator = ({navigation}) => {
                 backgroundColor: '#FFA222',
                 width: 81,
                 height: 4,
-                marginLeft: 50,
+                marginLeft: 48,
               },
             }}>
             <Tab.Screen name="SIGN IN" component={SignInScreen} />
