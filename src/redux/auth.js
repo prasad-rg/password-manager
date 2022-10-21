@@ -6,7 +6,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: initialValue,
-    isLoggedIn: null,
+    isLoggedIn: false,
   },
   reducers: {
     signUp: (state, action) => {
@@ -16,7 +16,7 @@ export const authSlice = createSlice({
     login: (state, action) => {
       state.user.forEach(user => {
         if (user.mobileNumber === action.payload.mobileNumber) {
-          state.isLoggedIn = user.mPin === action.payload.mPin;
+          state.isLoggedIn = user.mPin === action.payload.mPin ? true : null;
         }
       });
     },

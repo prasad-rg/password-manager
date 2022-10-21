@@ -17,7 +17,12 @@ const loginValidationSchema = yup.object().shape({
     .required('Mobile Number is required'),
   mPin: yup
     .string()
-    .max(4, ({min}) => `MPin must be at least ${min} characters`)
+    .max(4, ({max}) => `MPin must be ${max} characters`)
+    .matches(/(\d){4}\b/, 'Enter a valid 4 digit MPin')
+    .required('MPin is required'),
+  confirmMPin: yup
+    .string()
+    .max(4, ({max}) => `MPin must be ${max} characters`)
     .matches(/(\d){4}\b/, 'Enter a valid 4 digit MPin')
     .required('MPin is required'),
 });
@@ -33,21 +38,14 @@ const SignUpScreen = ({navigation}) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: '', confirmMPin: ''}}
-            onSubmit={
-              values => {
-                // await storeData(values);
-                if (!isLoggedIn) {
-                  dispatch(signUp(values));
-                  Toast.show(
-                    '\t Congrtats!!! Success \n    Signed Up  to access the vault',
-                  );
-                  // navigation.replace('PasswordManager');
-                } else {
-                  Alert.alert('Invalid Credentials');
-                }
+            onSubmit={values => {
+              if (!isLoggedIn) {
+                dispatch(signUp(values));
+                Toast.show(
+                  '\t Congrtats!!! Success \n    Signed Up  to access the vault',
+                );
               }
-              // onSubmit={values => dispatch(signUp(values))
-            }>
+            }}>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
               <>
                 <Input

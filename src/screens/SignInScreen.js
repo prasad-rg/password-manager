@@ -36,13 +36,11 @@ const SignInScreen = ({navigation}) => {
             onSubmit={values => {
               if (!isLoggedIn) {
                 dispatch(login(values));
-                Toast.show(
-                  '\t Congrtats!!! Success \n    Signin  to access the vault',
-                );
-                // authorize();
-                // navigation.replace('PasswordManager');
-              } else {
-                Alert.alert('Invalid Credentials');
+                if (isLoggedIn === true) {
+                  Toast.show(
+                    '\t Congrtats!!! Success \n    Signin  to access the vault',
+                  );
+                }
               }
             }}>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
@@ -76,6 +74,11 @@ const SignInScreen = ({navigation}) => {
                     Forgot your password?
                   </Text>
                 </Pressable>
+                {isLoggedIn === null && (
+                  <Text style={[styles.errorText, styles.invalidMessage]}>
+                    Invalid Credentials
+                  </Text>
+                )}
                 <Button
                   title="SIGN IN"
                   style={styles.button}
@@ -142,6 +145,10 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 10,
     color: 'red',
+  },
+  invalidMessage: {
+    marginTop: 10,
+    fontSize: 20,
   },
 });
 

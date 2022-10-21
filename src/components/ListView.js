@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 12,
     backgroundColor: '#FFFFFF',
-    elevation: 10,
+    elevation: 2,
     shadowColor: '#171717',
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowRadius: 3,
     marginBottom: 10,
   },
   rowView: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     paddingLeft: 18,
     paddingTop: 10,
     paddingEnd: 10,
-    width: 320,
+    width: '100%',
     height: 68,
   },
   urlContainer: {

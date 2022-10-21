@@ -77,7 +77,7 @@ const PasswordManagerScreen = ({navigation}) => {
               <Image source={dataSyncIcon} style={styles.commonIcon} />
               <TouchableOpacity
                 onPress={() => {
-                  dispatch(logout());
+                  dispatch(logout()) && Toast.show('Logged out successfully');
                   // console.log(isLoggedIn);
                 }}>
                 <Image source={profileIcon} style={styles.commonIcon} />
