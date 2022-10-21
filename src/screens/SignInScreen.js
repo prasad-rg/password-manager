@@ -7,7 +7,8 @@ import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import Toast from 'react-native-simple-toast';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import {authorize, validateCredentials} from '../utils/asyncStore';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../redux/auth';
 
 const loginValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -23,6 +24,8 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const SignInScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {isLoggedIn} = useSelector(state => state.auth);
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
@@ -30,13 +33,14 @@ const SignInScreen = ({navigation}) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: ''}}
-            onSubmit={async values => {
-              if (await validateCredentials(values)) {
+            onSubmit={values => {
+              if (!isLoggedIn) {
+                dispatch(login(values));
                 Toast.show(
                   '\t Congrtats!!! Success \n    Signin  to access the vault',
                 );
-                authorize();
-                navigation.replace('PasswordManager');
+                // authorize();
+                // navigation.replace('PasswordManager');
               } else {
                 Alert.alert('Invalid Credentials');
               }

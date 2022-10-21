@@ -23,6 +23,7 @@ import Toast from 'react-native-simple-toast';
 import {deletePassword, filterList} from '../redux/passManager';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import DropDown from '../components/DropDown';
+import {logout} from '../redux/auth';
 
 const PasswordManagerScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -74,7 +75,13 @@ const PasswordManagerScreen = ({navigation}) => {
                 <Image source={searchIcon} style={styles.commonIcon} />
               </TouchableOpacity>
               <Image source={dataSyncIcon} style={styles.commonIcon} />
-              <Image source={profileIcon} style={styles.commonIcon} />
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(logout());
+                  // console.log(isLoggedIn);
+                }}>
+                <Image source={profileIcon} style={styles.commonIcon} />
+              </TouchableOpacity>
             </View>
           </View>
           {isSearchClicked ? (

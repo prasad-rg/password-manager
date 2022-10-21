@@ -6,7 +6,8 @@ import Input from '../components/Input';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import Toast from 'react-native-simple-toast';
-import {storeData, validateCredentials} from '../utils/asyncStore';
+import {useDispatch, useSelector} from 'react-redux';
+import {signUp} from '../redux/auth';
 
 const loginValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -22,6 +23,9 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const SignUpScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {isLoggedIn} = useSelector(state => state.auth);
+
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
@@ -29,17 +33,21 @@ const SignUpScreen = ({navigation}) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: '', confirmMPin: ''}}
-            onSubmit={async values => {
-              await storeData(values);
-              if (await validateCredentials(values)) {
-                Toast.show(
-                  '\t Congrtats!!! Success \n    Signed Up  to access the vault',
-                );
-                navigation.replace('PasswordManager');
-              } else {
-                Alert.alert('Invalid Credentials');
+            onSubmit={
+              values => {
+                // await storeData(values);
+                if (!isLoggedIn) {
+                  dispatch(signUp(values));
+                  Toast.show(
+                    '\t Congrtats!!! Success \n    Signed Up  to access the vault',
+                  );
+                  // navigation.replace('PasswordManager');
+                } else {
+                  Alert.alert('Invalid Credentials');
+                }
               }
-            }}>
+              // onSubmit={values => dispatch(signUp(values))
+            }>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
               <>
                 <Input
