@@ -57,10 +57,12 @@ export const passManagerSlice = createSlice({
   name: 'passManager',
   initialState: {
     value: initialValue,
+    preValue: initialValue,
   },
   reducers: {
     addNewPassword: (state, action) => {
       state.value.push(action.payload);
+      state.preValue.push(action.payload);
     },
     updatePasswordDetails: (state, action) => {
       state.value = state.value.map(passwordObject => {
@@ -69,15 +71,40 @@ export const passManagerSlice = createSlice({
         }
         return passwordObject;
       });
+      state.preValue = state.value;
     },
     deletePassword: (state, action) => {
       state.value = state.value.filter(
         passwordDetails => passwordDetails.id !== action.payload,
       );
+      state.preValue = state.value;
+    },
+    filterList: (state, action) => {
+      state.value = state.preValue.filter(passwordDetails =>
+        passwordDetails.title
+          .toLowerCase()
+          .includes(action.payload.toLowerCase()),
+      );
+    },
+    dropDownFilter: (state, action) => {
+      if (action.payload === 'All') {
+        state.value = state.preValue;
+      } else {
+        state.value = state.preValue.filter(passwordDetails =>
+          passwordDetails.folder
+            .toLowerCase()
+            .includes(action.payload.toLowerCase()),
+        );
+      }
     },
   },
 });
 
-export const {addNewPassword, updatePasswordDetails, deletePassword} =
-  passManagerSlice.actions;
+export const {
+  addNewPassword,
+  updatePasswordDetails,
+  deletePassword,
+  filterList,
+  dropDownFilter,
+} = passManagerSlice.actions;
 export default passManagerSlice.reducer;

@@ -31,7 +31,7 @@ const AuthTabNavigator = ({navigation}) => {
                 backgroundColor: '#FFA222',
                 width: 81,
                 height: 4,
-                marginLeft: 50,
+                marginLeft: 48,
               },
             }}>
             <Tab.Screen name="SIGN IN" component={SignInScreen} />

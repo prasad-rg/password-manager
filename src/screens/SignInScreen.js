@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Pressable, Alert} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import fingerprintIcon from '../../assets/images/fingerprintIcon.png';
@@ -7,7 +7,8 @@ import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import Toast from 'react-native-simple-toast';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import {authorize, validateCredentials} from '../utils/asyncStore';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../redux/auth';
 
 const loginValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -23,8 +24,8 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const SignInScreen = ({navigation}) => {
-  // const [secureTextEntry, setSecureTextEntry] = useState(true);
-
+  const dispatch = useDispatch();
+  const {isLoggedIn} = useSelector(state => state.auth);
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
@@ -32,18 +33,14 @@ const SignInScreen = ({navigation}) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: ''}}
-            onSubmit={async values => {
-              // await storeData(values);
-              // const res = await getData(values.mobileNumber);
-              // console.log(res);
-              if (await validateCredentials(values)) {
-                Toast.show(
-                  '\t Congrtats!!! Success \n    Signin  to access the vault',
-                );
-                authorize();
-                navigation.replace('PasswordManager');
-              } else {
-                Alert.alert('Invalid Credentials');
+            onSubmit={values => {
+              if (!isLoggedIn) {
+                dispatch(login(values));
+                if (isLoggedIn === true) {
+                  Toast.show(
+                    '\t Congrtats!!! Success \n    Signin  to access the vault',
+                  );
+                }
               }
             }}>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
@@ -77,6 +74,11 @@ const SignInScreen = ({navigation}) => {
                     Forgot your password?
                   </Text>
                 </Pressable>
+                {isLoggedIn === null && (
+                  <Text style={[styles.errorText, styles.invalidMessage]}>
+                    Invalid Credentials
+                  </Text>
+                )}
                 <Button
                   title="SIGN IN"
                   style={styles.button}
@@ -108,11 +110,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   singInComponentHolder: {
-    marginTop: 43,
+    marginTop: 17,
     flex: 1,
   },
   mPinInput: {
-    marginTop: 26,
+    paddingLeft: 26,
   },
   forgotPasswordText: {
     color: '#FFFFFF',
@@ -143,6 +145,10 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 10,
     color: 'red',
+  },
+  invalidMessage: {
+    marginTop: 10,
+    fontSize: 20,
   },
 });
 

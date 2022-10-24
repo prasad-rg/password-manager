@@ -19,10 +19,11 @@ import FloatingActionButton from '../components/FloatingActionButton';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useDispatch, useSelector} from 'react-redux';
 import SearchBar from '../components/SearchBar';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-simple-toast';
-import {deletePassword} from '../redux/passManager';
+import {deletePassword, filterList} from '../redux/passManager';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import DropDown from '../components/DropDown';
+import {logout} from '../redux/auth';
 
 const PasswordManagerScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -44,7 +45,6 @@ const PasswordManagerScreen = ({navigation}) => {
     Toast.show('Copied to clipboard');
   };
   const handelDelete = item => {
-    // dispatch(deletePassword(id));
     confirmAlert(item);
   };
   const renderItem = ({item}) => {
@@ -75,29 +75,24 @@ const PasswordManagerScreen = ({navigation}) => {
                 <Image source={searchIcon} style={styles.commonIcon} />
               </TouchableOpacity>
               <Image source={dataSyncIcon} style={styles.commonIcon} />
-              <Image source={profileIcon} style={styles.commonIcon} />
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(logout()) && Toast.show('Logged out successfully');
+                  // console.log(isLoggedIn);
+                }}>
+                <Image source={profileIcon} style={styles.commonIcon} />
+              </TouchableOpacity>
             </View>
           </View>
           {isSearchClicked ? (
-            <SearchBar />
+            <SearchBar onChangeText={text => dispatch(filterList(text))} />
           ) : (
             <View style={styles.textHeaderContainer}>
               <View>
                 <Text style={styles.headerText}>Sites</Text>
                 <View style={styles.bottomBorder} />
               </View>
-              <View style={styles.categoryContainer}>
-                <Text style={styles.category}>Social Media</Text>
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{value.length}</Text>
-                </View>
-                <Icon
-                  color="#0E85FF"
-                  name="keyboard-arrow-down"
-                  size={22}
-                  style={styles.dropDown}
-                />
-              </View>
+              <DropDown />
             </View>
           )}
           <View style={styles.listItemContainer}>
@@ -130,6 +125,11 @@ const styles = StyleSheet.create({
     height: 56,
     backgroundColor: '#0E85FF',
     padding: 18,
+    shadowColor: '#3C4857',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 20,
   },
   header: {
     flex: 1,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   textHeaderContainer: {
     marginVertical: 20,
     marginHorizontal: 20,
-    height: 37,
+    // height: 37,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

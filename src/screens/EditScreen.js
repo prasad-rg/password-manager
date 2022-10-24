@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Text, Pressable, ScrollView} from 'react-native';
 import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import {Formik} from 'formik';
@@ -21,6 +21,8 @@ const EditSiteValidationSchema = yup.object().shape({
 const EditScreen = ({navigation, route}) => {
   const siteDetails = route.params.siteDetails;
   const dispatch = useDispatch();
+  const [folder, setFolder] = useState('');
+
   return (
     <KeyboardAvoidingComponent>
       <ScrollView style={styles.container}>
@@ -46,6 +48,7 @@ const EditScreen = ({navigation, route}) => {
             values = {
               ...values,
               id: siteDetails.id,
+              folder: folder,
               icon: siteDetails.icon ? siteDetails.icon : '',
               title: values.siteName.substring(4, values.siteName.length - 4),
             };
@@ -76,8 +79,13 @@ const EditScreen = ({navigation, route}) => {
                 />
                 <FormField
                   label="Sector/Folder"
+                  name="folder"
+                  isDropDown={true}
+                  onSelect={(selectedItem, index) => {
+                    setFolder(selectedItem);
+                  }}
                   value={values.folder}
-                  onChangeText={handleChange('folder')}
+                  defaultValue={values.folder}
                 />
                 <FormField
                   label="User Name"
@@ -119,6 +127,11 @@ const styles = StyleSheet.create({
     height: 76,
     backgroundColor: '#0E85FF',
     paddingTop: 41,
+    shadowColor: '#3C4857',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 20,
   },
   headerText: {
     color: '#FFFFFF',

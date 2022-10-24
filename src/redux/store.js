@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import passManagerReducer from './passManager';
+import authReducer from './auth';
 import {persistReducer} from 'redux-persist';
 
 const persistConfig = {
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   passManager: passManagerReducer,
+  auth: authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

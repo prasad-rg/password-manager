@@ -1,12 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, Alert} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import KeyboardAvoidingComponent from '../components/KeyboardAvoidingComponent';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import Toast from 'react-native-simple-toast';
-import {storeData, validateCredentials} from '../utils/asyncStore';
+import {useDispatch, useSelector} from 'react-redux';
+import {signUp} from '../redux/auth';
 
 const loginValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -16,12 +17,20 @@ const loginValidationSchema = yup.object().shape({
     .required('Mobile Number is required'),
   mPin: yup
     .string()
-    .max(4, ({min}) => `MPin must be at least ${min} characters`)
+    .max(4, ({max}) => `MPin must be ${max} characters`)
+    .matches(/(\d){4}\b/, 'Enter a valid 4 digit MPin')
+    .required('MPin is required'),
+  confirmMPin: yup
+    .string()
+    .max(4, ({max}) => `MPin must be ${max} characters`)
     .matches(/(\d){4}\b/, 'Enter a valid 4 digit MPin')
     .required('MPin is required'),
 });
 
 const SignUpScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {isLoggedIn} = useSelector(state => state.auth);
+
   return (
     <KeyboardAvoidingComponent>
       <View style={styles.container}>
@@ -29,15 +38,12 @@ const SignUpScreen = ({navigation}) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{mPin: '', mobileNumber: '', confirmMPin: ''}}
-            onSubmit={async values => {
-              await storeData(values);
-              if (await validateCredentials(values)) {
+            onSubmit={values => {
+              if (!isLoggedIn) {
+                dispatch(signUp(values));
                 Toast.show(
                   '\t Congrtats!!! Success \n    Signed Up  to access the vault',
                 );
-                navigation.replace('PasswordManager');
-              } else {
-                Alert.alert('Invalid Credentials');
               }
             }}>
             {({handleChange, handleBlur, handleSubmit, values, errors}) => (
@@ -99,11 +105,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   singUpComponentHolder: {
-    marginTop: 43,
+    marginTop: 14,
     flex: 1,
   },
   mPinInput: {
-    marginVertical: 26,
+    paddingLeft: 26,
   },
   forgotPasswordText: {
     color: '#FFFFFF',
