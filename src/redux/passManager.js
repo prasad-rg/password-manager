@@ -17,6 +17,7 @@ const initialValue = [
     notes: '',
     icon: IMAGES_ICONS[0],
     title: 'Facebook',
+    userId: '8904177732',
   },
   {
     id: '2',
@@ -28,6 +29,7 @@ const initialValue = [
     notes: '',
     icon: IMAGES_ICONS[2],
     title: 'Twitter',
+    userId: '8904177732',
   },
   {
     id: '3',
@@ -39,6 +41,7 @@ const initialValue = [
     notes: '',
     icon: IMAGES_ICONS[3],
     title: 'Youtube',
+    userId: '8904177732',
   },
   {
     id: '4',
@@ -50,6 +53,7 @@ const initialValue = [
     notes: '',
     icon: IMAGES_ICONS[1],
     title: 'Instagram',
+    userId: '8904177732',
   },
 ];
 
